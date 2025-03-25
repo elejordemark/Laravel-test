@@ -83,7 +83,6 @@
         <div class="w-full md:w-1/2 hidden md:block bg-cover bg-center border-[10px] border-white rounded-3xl"
             style="background-image: url('{{ asset('assets/img/bg.jpeg') }}');">
         </div>
-
         </div>
     </div>
 </body>
