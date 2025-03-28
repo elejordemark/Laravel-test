@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,23 +14,37 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased h-full">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+            <div class="pl-16 transition-all duration-300"> <!-- Add padding for the sidebar -->
+                <!-- Page Heading -->
+                @isset($header)
+                    <header class="bg-white dark:bg-gray-800 shadow">
+                        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                            {{ $header }}
+                        </div>
+                    </header>
+                @endisset
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <!-- Page Content -->
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
+
+        <!-- Dark mode initialization script -->
+        <script>
+            // Check for dark mode preference
+            if (localStorage.getItem('color-theme') === 'dark' || 
+                (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
     </body>
 </html>
+
